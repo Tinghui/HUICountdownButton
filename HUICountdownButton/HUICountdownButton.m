@@ -33,6 +33,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     [self _loadDefaultConfiguration];
 }
 
