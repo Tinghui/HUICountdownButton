@@ -22,7 +22,7 @@
     return btn;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -31,11 +31,13 @@
     return self;
 }
 
-- (void)awakeFromNib
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    [super awakeFromNib];
-    
-    [self _loadDefaultConfiguration];
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self _loadDefaultConfiguration];
+    }
+    return self;
 }
 
 - (void)_loadDefaultConfiguration

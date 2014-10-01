@@ -10,29 +10,29 @@
 	<string>HUICountdownButton</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>ECE8C88E-B7D3-4BC8-9287-8EDA34AEBE8F</key>
+		<key>27EBE5B9478AE1FA9E2C3C20BE4D1A7F323DFF48</key>
 		<string>ssh://github.com/Tinghui/HUICountdownButton.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>HUICountdownButton.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>ECE8C88E-B7D3-4BC8-9287-8EDA34AEBE8F</key>
+		<key>27EBE5B9478AE1FA9E2C3C20BE4D1A7F323DFF48</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/Tinghui/HUICountdownButton.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>ECE8C88E-B7D3-4BC8-9287-8EDA34AEBE8F</string>
+	<string>27EBE5B9478AE1FA9E2C3C20BE4D1A7F323DFF48</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>ECE8C88E-B7D3-4BC8-9287-8EDA34AEBE8F</string>
+			<string>27EBE5B9478AE1FA9E2C3C20BE4D1A7F323DFF48</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HUICountdownButton</string>
 		</dict>
