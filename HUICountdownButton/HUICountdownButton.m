@@ -45,6 +45,15 @@
     self.disableWhenCounting = YES;
 }
 
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    [super willMoveToSuperview:newSuperview];
+    
+    if (newSuperview == nil) {
+        [self stopCountdown];
+    }
+}
+
 - (void)startCountdown
 {
     if (self.countdownTotalCount <= 0) {
