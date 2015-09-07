@@ -1,5 +1,8 @@
 # HUICountdownButton
+
 UIButton subclass with countdown
+
+![](https://github.com/Tinghui/HUICountdownButton/blob/master/HUICountdownButtonDemo/preview.gif)
 
 ## Installation
 
