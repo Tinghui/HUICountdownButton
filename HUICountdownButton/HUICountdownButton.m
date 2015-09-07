@@ -10,20 +10,19 @@
 
 @interface HUICountdownButton ()
 @property (nonatomic, weak)     NSTimer     *timer;
-@property (nonatomic, assign)   NSUInteger  countdownCurrentCount;
+@property (nonatomic, assign) NSInteger currentCount;;
 @end
 
 
 @implementation HUICountdownButton
-+ (id)buttonWithType:(UIButtonType)buttonType
-{
+
++ (id)buttonWithType:(UIButtonType)buttonType {
     id btn = [super buttonWithType:buttonType];
     [btn _loadDefaultConfiguration];
     return btn;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self _loadDefaultConfiguration];
@@ -31,8 +30,7 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self _loadDefaultConfiguration];
@@ -40,13 +38,14 @@
     return self;
 }
 
-- (void)_loadDefaultConfiguration
-{
+- (void)_loadDefaultConfiguration {
     self.disableWhenCounting = YES;
+    self.interval = 1.0f;
+    self.totalCount = 60;
+    self.currentCount = 0;
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview
-{
+- (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     
     if (newSuperview == nil) {
@@ -54,18 +53,21 @@
     }
 }
 
-- (void)startCountdown
-{
-    if (self.countdownTotalCount <= 0) {
+- (void)startCountdown {
+    if (self.totalCount <= 0) {
         return;
+    }
+    
+    if ([self.timer isValid]) {
+        [self stopCountdown];
     }
     
     if (self.disableWhenCounting) {
         [self setEnabled:NO];
     }
     
-    self.countdownCurrentCount = 0;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.countdownInterval
+    self.currentCount = 0;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.interval
                                                   target:self
                                                 selector:@selector(_timerFired:)
                                                 userInfo:nil
@@ -81,25 +83,23 @@
     }
 }
 
-- (void)_timerFired:(NSTimer *)timer
-{
-    self.countdownCurrentCount += 1;
+- (void)_timerFired:(NSTimer *)timer {
+    self.currentCount += 1;
     
-    if (self.countdownDidStepped) {
-        self.countdownDidStepped(self);
+    if (self.countdownDidCounted) {
+        self.countdownDidCounted(self);
     }
     
-    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(countdownDidStepped:)]) {
-        [self.delegate countdownDidStepped:self];
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(countdownDidCounted:)]) {
+        [self.delegate countdownDidCounted:self];
     }
     
-    if (self.countdownCurrentCount >= self.countdownTotalCount) {
+    if (self.currentCount >= self.totalCount) {
         [self stopCountdown];
     }
 }
 
-- (void)stopCountdown
-{
+- (void)stopCountdown {
     if ([self.timer isValid]) {
         [self.timer invalidate];
     }
@@ -118,3 +118,5 @@
 }
 
 @end
+
+

@@ -11,30 +11,54 @@
 
 @class HUICountdownButton;
 @protocol HUICountdownButtonDelegate <NSObject>
-
 @optional
+/*! Notify countdown did started */
 - (void)countdownDidStarted:(HUICountdownButton *)button;
-- (void)countdownDidStepped:(HUICountdownButton *)button;
+
+/*! Notify countdown did counted */
+- (void)countdownDidCounted:(HUICountdownButton *)button;
+
+/*! Notify countdown did completed */
 - (void)countdownDidCompleted:(HUICountdownButton *)button;
 
 @end
 
 
+
 @interface HUICountdownButton : UIButton
 
-/**
- *  Indicate whether disable the button when it's counting down
- *  Default is YES
+/*! 
+ *  Indicate whether disable the button when it's counting down. 
+ *
+ *  Default is YES.
  */
 @property (nonatomic, assign) BOOL disableWhenCounting;
 
-@property (nonatomic, assign)           NSTimeInterval    countdownInterval;
-@property (nonatomic, assign)           NSUInteger        countdownTotalCount;
-@property (nonatomic, assign, readonly) NSUInteger        countdownCurrentCount;
+/*! 
+ *  Time interval between two counts.
+ *
+ *  Default is 1.0 seconds. Can't be less than or equal to 0.
+ *
+ *  Total countdown time = interval * totalCount. @see totalCount
+ */
+@property (nonatomic, assign) NSTimeInterval interval;
+
+/*! 
+ *  Total count. 
+ *  
+ *  Default is 60. Can't be less than or equal to 0.  
+ */
+@property (nonatomic, assign) NSInteger totalCount;
+
+/*! 
+ *  Current count 
+ */
+@property (nonatomic, assign, readonly) NSInteger currentCount;
 
 @property (nonatomic, weak) id<HUICountdownButtonDelegate> delegate;
+
 @property (nonatomic, copy) void (^countdownDidStarted)(HUICountdownButton *button);
-@property (nonatomic, copy) void (^countdownDidStepped)(HUICountdownButton *button);
+@property (nonatomic, copy) void (^countdownDidCounted)(HUICountdownButton *button);
 @property (nonatomic, copy) void (^countdownDidCompleted)(HUICountdownButton *button);
 
 
@@ -44,4 +68,6 @@
 - (void)stopCountdown;
 
 @end
+
+
 

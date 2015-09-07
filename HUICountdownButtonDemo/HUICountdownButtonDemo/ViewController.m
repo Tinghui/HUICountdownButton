@@ -17,21 +17,19 @@
 
 @implementation ViewController
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self.countdownButton stopCountdown];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.countdownButton.layer setCornerRadius:4.0];
     [self.countdownButton.layer setBorderWidth:1.0];
     [self.countdownButton.layer setBorderColor:[[UIColor blueColor] CGColor]];
     
-    [self.countdownButton setCountdownTotalCount:10];
-    [self.countdownButton setCountdownInterval:1.0f];
+    [self.countdownButton setTotalCount:5];
+    [self.countdownButton setInterval:1.0f];
     [self.countdownButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.countdownButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [self.countdownButton addTarget:self
@@ -40,23 +38,18 @@
     
     
     [self.countdownButton setCountdownDidStarted:^(HUICountdownButton *button) {
-        NSString *title = [NSString stringWithFormat:@"Refresh After(%d)",
-                           button.countdownTotalCount - button.countdownCurrentCount];
-        [button setTitle:title
-                forState:UIControlStateDisabled];
+        NSString *title = [NSString stringWithFormat:@"Refresh After(%ld)", (long)(button.totalCount - button.currentCount)];
+        [button setTitle:title forState:UIControlStateDisabled];
         [button.layer setBorderColor:[[UIColor grayColor] CGColor]];
     }];
     
-    [self.countdownButton setCountdownDidStepped:^(HUICountdownButton *button) {
-        NSString *title = [NSString stringWithFormat:@"Refresh After(%d)",
-                           button.countdownTotalCount - button.countdownCurrentCount];
-        [button setTitle:title
-                forState:UIControlStateDisabled];
+    [self.countdownButton setCountdownDidCounted:^(HUICountdownButton *button) {
+        NSString *title = [NSString stringWithFormat:@"Refresh After(%ld)", (long)(button.totalCount - button.currentCount)];
+        [button setTitle:title forState:UIControlStateDisabled];
     }];
     
     [self.countdownButton setCountdownDidCompleted:^(HUICountdownButton *button) {
-        [button setTitle:@"Refresh"
-                forState:UIControlStateNormal];
+        [button setTitle:@"Refresh" forState:UIControlStateNormal];
         [button.layer setBorderColor:[[UIColor blueColor] CGColor]];
     }];
     
@@ -66,39 +59,29 @@
     [self.countdownButton startCountdown];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)_countdownButtonPressed:(HUICountdownButton *)button
-{
+- (void)_countdownButtonPressed:(HUICountdownButton *)button {
     [button startCountdown];
 }
 
 #pragma mark - HUICountdownButtonDelegate
-- (void)countdownDidStarted:(HUICountdownButton *)button
-{
-    NSString *title = [NSString stringWithFormat:@"Refresh After(%d)",
-                       button.countdownTotalCount - button.countdownCurrentCount];
-    [button setTitle:title
-            forState:UIControlStateDisabled];
+- (void)countdownDidStarted:(HUICountdownButton *)button {
+    NSString *title = [NSString stringWithFormat:@"Refresh After(%ld)", (long)(button.totalCount - button.currentCount)];
+    [button setTitle:title forState:UIControlStateDisabled];
     [button.layer setBorderColor:[[UIColor grayColor] CGColor]];
 }
 
-- (void)countdownDidStepped:(HUICountdownButton *)button
-{
-    NSString *title = [NSString stringWithFormat:@"Refresh After(%d)",
-                       button.countdownTotalCount - button.countdownCurrentCount];
-    [button setTitle:title
-            forState:UIControlStateDisabled];
+- (void)countdownDidStepped:(HUICountdownButton *)button {
+    NSString *title = [NSString stringWithFormat:@"Refresh After(%ld)", (long)(button.totalCount - button.currentCount)];
+    [button setTitle:title forState:UIControlStateDisabled];
 }
 
-- (void)countdownDidCompleted:(HUICountdownButton *)button
-{
-    [button setTitle:@"Refresh"
-            forState:UIControlStateNormal];
+- (void)countdownDidCompleted:(HUICountdownButton *)button {
+    [button setTitle:@"Refresh" forState:UIControlStateNormal];
     [button.layer setBorderColor:[[UIColor blueColor] CGColor]];
 }
 
